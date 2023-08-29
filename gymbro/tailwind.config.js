@@ -9,7 +9,12 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        gymBg: "#000000",
+        gymGreen: "#B1F2CF",
+      },
+    },
   },
   plugins: [],
 };
