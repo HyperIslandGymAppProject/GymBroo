@@ -11,8 +11,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        gymBg: "#000000",
+        gymBg: "#1E1E1E",
         gymGreen: "#B1F2CF",
+        gymGray: "#CDCDCD",
+        gymCard: "#181616",
       },
     },
   },

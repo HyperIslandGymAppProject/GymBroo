@@ -4,7 +4,7 @@ import Avatar from "./Avatar";
 export default function PostFormCard() {
   return (
     <Card>
-      <div className="flex gap-2 ">
+      <div className="flex gap-2 p-4  ">
         <div>
           <Avatar />
         </div>

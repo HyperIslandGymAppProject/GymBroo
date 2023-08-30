@@ -1,16 +1,17 @@
 import Card from "./card";
+
 export default function NavigationCard() {
   return (
     <Card>
-      <div className="px-4">
+      <div className="py-8 text-gymGray rounded-sm ">
         {" "}
-        <h2 className="text-gray-400 mb-3 ">
+        <h2 className="text-gray-400 mb-3 mx-7 -my-3 ">
           {" "}
           Navigation{" "}
         </h2>
         <a
           href=""
-          className="flex gap-4 py-3"
+          className="flex gap-4 py-3 bg-gymGreen text-black -mx-2 px-4 rounded-md shadow-gray"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +31,7 @@ export default function NavigationCard() {
         </a>
         <a
           href=""
-          className="flex gap-4 py-3"
+          className="flex gap-4 py-1 my-2 hover:bg-gymGreen hover:bg-opacity-20 hover:scale-98 hover:text-black hover:shadow-md hover:my-4 shadow-gray-300 -mx-2 px-2 my-2 rounded-md transition-all"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
