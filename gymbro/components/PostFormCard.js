@@ -4,12 +4,13 @@ import Avatar from "./Avatar";
 export default function PostFormCard() {
   return (
     <Card>
-      <div className="flex gap-2 p-4  ">
+      <div className="flex gap-2 p-4 pb">
         <div>
           <Avatar />
         </div>
+      
         <textarea
-          className=" grow p-3"
+          className=" grow p-3 opacity-20 rounded-md"
           placeholder={
             "whats up on your"
           }
@@ -18,7 +19,7 @@ export default function PostFormCard() {
         </textarea>
       </div>
       <div className=" grow text-right mt-2 ">
-        <button className="bg-gymGreen text-black px-6 py-1 rounded-md ">
+        <button className="bg-gymPurple text-black px-6 py-1 rounded-md ">
           {" "}
           Post
         </button>

@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function PostCard() {
   return (
     <Card>
-      <div className="flex gap-3 p-4 ">
+      <div className="flex gap-3 p-4">
         <div>
           <Link href={"/profile"}>
             <span className=" cursor-pointer">
@@ -13,7 +13,7 @@ export default function PostCard() {
             </span>
           </Link>
         </div>
-        <div className="grow">
+        <div className="grow pt-3">
           <p>
             <Link href={"/profile"}>
               {" "}
@@ -22,18 +22,18 @@ export default function PostCard() {
               </span>{" "}
             </Link>
             shared a{" "}
-            <a className="text-gymGreen">
+            <a className="text-gymPurple">
               {" "}
               workout
             </a>
           </p>
-          <p className="text-gray-500 text-sn">
+          <p className="text-gymGreen text-sn">
             2h ago
           </p>
         </div>
         <div>
           <button
-            className="text-gray-400"
+            className="text-gray-400 "
             onClick={() =>
               setDropDownOpen(true)
             }
@@ -55,18 +55,18 @@ export default function PostCard() {
           </button>
         </div>
       </div>
-      <div>
-        <p className="my-3 text-sm">
+      <div className="pb-2">
+        <p className="my-3 text-sm pl-8 pr-6 ">
           Today I am gonna bench for
           30000 times. Today I am gonna
-          bench for 30000 times.Today I
+          bench for 30000 times. Today I
           am gonna bench for 30000
-          times.Today I am gonna bench
+          times. Today I am gonna bench
           for 30000 times. Today I am
           gonna bench for 30000 times
         </p>
-        <div className="mt-5">
-          <button className="flex gap-2 items-container">
+        <div className="mt-5 pl-3 pb-2">
+          <button className="flex gap-2 items-container text-gymPurple">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
