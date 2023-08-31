@@ -2,14 +2,21 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Avatar from "../components/Avatar";
 import Card from "../components/card";
+import FriendInfo from "../components/FriendInfo";
 import Layout from "../components/Layout";
 import PostCard from "../components/PostCard";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { pathname } = useRouter();
+  const { asPath: pathname } = router;
+  const isWorkouts =
+    pathname.includes("workouts");
   const isFriends =
     pathname.includes("friends");
+  const tabClasses =
+    "flex gap-1 px-4 py-1 items-center border-b-4 border-b-gymCard";
+  const activeTabClasses =
+    "flex gap-1 px-4 py-1 items-center border-gymGreen border-b-4 text-gymGreen font-bold";
 
   return (
     <Layout>
@@ -24,14 +31,47 @@ export default function ProfilePage() {
             {" "}
             <h1> John Doe </h1>
           </div>
-          <div className="text-gray-500 leading-4 flex justify-center p">
+          <div className="text-gray- leading-4 flex justify-center p">
             {" "}
             Stockholm, Sweden
           </div>
-          <div className="mt-3 flex justify-center">
+          <div className="mt-10 flex gap-10">
             <Link
-              href={"/"}
-              className=" flex gap-2  "
+              href={"/profile/workouts"}
+              className={
+                isWorkouts
+                  ? activeTabClasses
+                  : tabClasses
+              }
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"
+                />
+              </svg>
+              Workouts
+            </Link>
+            <Link
+              href={"/profile/friends"}
+              className={
+                isFriends
+                  ? activeTabClasses
+                  : tabClasses
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +92,24 @@ export default function ProfilePage() {
           </div>
         </div>
       </Card>{" "}
-      <PostCard />
+      {isWorkouts && (
+        <div>
+          <PostCard />
+        </div>
+      )}
+      {isFriends && (
+        <div>
+          <Card>
+            <h2 className=" text-3xl mb-2 ">
+              {" "}
+              Friends
+            </h2>
+            <div>
+              <FriendInfo />
+            </div>
+          </Card>
+        </div>
+      )}
     </Layout>
   );
 }

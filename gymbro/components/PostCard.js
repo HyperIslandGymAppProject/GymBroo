@@ -7,7 +7,9 @@ export default function PostCard() {
     <Card>
       <div className="flex gap-3 p-4 ">
         <div>
-          <Link href={"/profile"}>
+          <Link
+            href={"/profile/workouts"}
+          >
             <span className=" cursor-pointer">
               <Avatar />
             </span>
@@ -15,7 +17,9 @@ export default function PostCard() {
         </div>
         <div className="grow">
           <p>
-            <Link href={"/profile"}>
+            <Link
+              href={"/profile/workouts"}
+            >
               {" "}
               <span className="mr-1 font-semibold hover:underline cursor-pointer">
                 John Doe
@@ -32,12 +36,7 @@ export default function PostCard() {
           </p>
         </div>
         <div>
-          <button
-            className="text-gray-400"
-            onClick={() =>
-              setDropDownOpen(true)
-            }
-          >
+          <button className="text-gray-400">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
