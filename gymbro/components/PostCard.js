@@ -1,19 +1,26 @@
 import Avatar from "./Avatar";
 import Card from "./card";
+import Link from "next/link";
 
 export default function PostCard() {
   return (
     <Card>
       <div className="flex gap-3 p-4 ">
         <div>
-          <Avatar />
+          <Link href={"/profile"}>
+            <span className=" cursor-pointer">
+              <Avatar />
+            </span>
+          </Link>
         </div>
         <div className="grow">
           <p>
-            {" "}
-            <a className="font-semibold">
-              John Doe
-            </a>{" "}
+            <Link href={"/profile"}>
+              {" "}
+              <span className="mr-1 font-semibold hover:underline cursor-pointer">
+                John Doe
+              </span>{" "}
+            </Link>
             shared a{" "}
             <a className="text-gymGreen">
               {" "}
