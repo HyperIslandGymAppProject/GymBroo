@@ -9,10 +9,8 @@ import PostCard from "../components/PostCard";
 export default function ProfilePage() {
   const router = useRouter();
   const { asPath: pathname } = router;
-  const isWorkouts =
-    pathname.includes("workouts");
-  const isFriends =
-    pathname.includes("friends");
+  const isWorkouts = pathname.includes("workouts");
+  const isFriends = pathname.includes("friends");
   const tabClasses =
     "flex gap-1 px-4 py-1 items-center border-b-4 border-b-gymCard";
   const activeTabClasses =
@@ -38,11 +36,7 @@ export default function ProfilePage() {
           <div className="mt-10 flex gap-10">
             <Link
               href={"/profile/workouts"}
-              className={
-                isWorkouts
-                  ? activeTabClasses
-                  : tabClasses
-              }
+              className={isWorkouts ? activeTabClasses : tabClasses}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,11 +61,7 @@ export default function ProfilePage() {
             </Link>
             <Link
               href={"/profile/friends"}
-              className={
-                isFriends
-                  ? activeTabClasses
-                  : tabClasses
-              }
+              className={isFriends ? activeTabClasses : tabClasses}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +77,7 @@ export default function ProfilePage() {
                   d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
                 />
               </svg>
-              Friends
+              Community
             </Link>
           </div>
         </div>
@@ -100,12 +90,20 @@ export default function ProfilePage() {
       {isFriends && (
         <div>
           <Card>
-            <h2 className=" text-3xl mb-2 ">
-              {" "}
-              Friends
-            </h2>
-            <div>
-              <FriendInfo />
+            <h2 className=" text-3xl mb-2 "> Members </h2>
+            <div className="">
+              <div className="border-b-gray-100 p-4 -mx-4">
+                <FriendInfo />
+              </div>
+              <div className=" border-b-gray-100 p-4 -mx-4">
+                <FriendInfo />
+              </div>
+              <div className="border-b-gray-100 p-4 -mx-4">
+                <FriendInfo />
+              </div>{" "}
+              <div className="border-b-gray-100 p-4 -mx-4">
+                <FriendInfo />
+              </div>
             </div>
           </Card>
         </div>

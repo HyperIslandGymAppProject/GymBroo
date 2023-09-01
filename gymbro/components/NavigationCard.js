@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function NavigationCard() {
   const router = useRouter();
-  const { pathname } = router;
+  const { asPath: pathname } = router;
 
   const activeElementClasses =
     "flex gap-4 py-3 bg-gymGreen text-black -mx-2 px-4 rounded-md shadow-gray";
@@ -15,16 +15,11 @@ export default function NavigationCard() {
     <Card>
       <div className="py-8 px-5 text-gymGray rounded-sm ">
         {" "}
-        <h2 className="text-gray-400 mb-3 mx-7 -my-3 ">
-          {" "}
-          Navigation{" "}
-        </h2>
+        <h2 className="text-gray-400 mb-3 mx-7 -my-3 "> Navigation </h2>
         <Link
           href="/"
           className={
-            pathname === "/"
-              ? activeElementClasses
-              : nonActiveElementClasses
+            pathname === "/" ? activeElementClasses : nonActiveElementClasses
           }
         >
           <svg
@@ -44,9 +39,11 @@ export default function NavigationCard() {
           Home
         </Link>
         <Link
-          href=""
+          href="/profile/friends"
           className={
-            nonActiveElementClasses
+            pathname === "/profile/friends"
+              ? activeElementClasses
+              : nonActiveElementClasses
           }
           // We have to fix this animation later so it looks good
         >
@@ -66,12 +63,7 @@ export default function NavigationCard() {
           </svg>{" "}
           Community
         </Link>
-        <Link
-          href=""
-          className={
-            nonActiveElementClasses
-          }
-        >
+        <Link href="" className={nonActiveElementClasses}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -88,12 +80,7 @@ export default function NavigationCard() {
           </svg>{" "}
           Notifications
         </Link>
-        <Link
-          href=""
-          className={
-            nonActiveElementClasses
-          }
-        >
+        <Link href="" className={nonActiveElementClasses}>
           <svg
             xmlns="flex gap-4 py-1 my-2 hover:bg-gymGreen hover:bg-opacity-20 hover:scale-98 hover:text-black hover:shadow-md hover:my-4 shadow-gray-300 -mx-2 px-2 my-2 rounded-md transition-all"
             fill="none"

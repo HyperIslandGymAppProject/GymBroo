@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         gymBg: "#1E1E1E",
         gymGreen: "#B1F2CF",
+        gymPurple: "#6B1FD1",
         gymGray: "#CDCDCD",
         gymCard: "#181616",
       },

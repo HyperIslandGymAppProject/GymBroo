@@ -7,33 +7,23 @@ export default function PostCard() {
     <Card>
       <div className="flex gap-3 p-4 ">
         <div>
-          <Link
-            href={"/profile/workouts"}
-          >
+          <Link href={"/profile/workouts"}>
             <span className=" cursor-pointer">
               <Avatar />
             </span>
           </Link>
         </div>
-        <div className="grow">
+        <div className="grow pt-3">
           <p>
-            <Link
-              href={"/profile/workouts"}
-            >
+            <Link href={"/profile/workouts"}>
               {" "}
               <span className="mr-1 font-semibold hover:underline cursor-pointer">
                 John Doe
               </span>{" "}
             </Link>
-            shared a{" "}
-            <a className="text-gymGreen">
-              {" "}
-              workout
-            </a>
+            shared a <a className="text-gymPurple"> workout</a>
           </p>
-          <p className="text-gray-500 text-sn">
-            2h ago
-          </p>
+          <p className="text-gymGreen text-sn">2h ago</p>
         </div>
         <div>
           <button className="text-gray-400">
@@ -54,17 +44,13 @@ export default function PostCard() {
           </button>
         </div>
       </div>
-      <div>
-        <p className="my-3 text-sm">
-          Today I am gonna bench for
-          30000 times. Today I am gonna
-          bench for 30000 times.Today I
-          am gonna bench for 30000
-          times.Today I am gonna bench
-          for 30000 times. Today I am
-          gonna bench for 30000 times
+      <div className="pb-2">
+        <p className="my-3 text-sm pl-8 pr-6">
+          Today I am gonna bench for 30000 times. Today I am gonna bench for
+          30000 times.Today I am gonna bench for 30000 times.Today I am gonna
+          bench for 30000 times. Today I am gonna bench for 30000 times
         </p>
-        <div className="mt-5">
+        <div className="mt-5 pl-3 pb-2">
           <button className="flex gap-2 items-container">
             <svg
               xmlns="http://www.w3.org/2000/svg"
