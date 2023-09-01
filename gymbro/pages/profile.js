@@ -9,8 +9,10 @@ import PostCard from "../components/PostCard";
 export default function ProfilePage() {
   const router = useRouter();
   const { asPath: pathname } = router;
-  const isWorkouts = pathname.includes("workouts");
-  const isFriends = pathname.includes("friends");
+  const isWorkouts =
+    pathname.includes("workouts");
+  const isFriends =
+    pathname.includes("friends");
   const tabClasses =
     "flex gap-1 px-4 py-1 items-center border-b-4 border-b-gymCard";
   const activeTabClasses =
@@ -23,7 +25,7 @@ export default function ProfilePage() {
         <div className=" flex flex-col py-4">
           {" "}
           <div className="flex justify-center">
-            <Avatar size={"big"} />{" "}
+            <Avatar size={"lg"} />{" "}
           </div>
           <div className="flex justify-center text-3xl font-bold">
             {" "}
@@ -36,7 +38,11 @@ export default function ProfilePage() {
           <div className="mt-10 flex gap-10">
             <Link
               href={"/profile/workouts"}
-              className={isWorkouts ? activeTabClasses : tabClasses}
+              className={
+                isWorkouts
+                  ? activeTabClasses
+                  : tabClasses
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +67,11 @@ export default function ProfilePage() {
             </Link>
             <Link
               href={"/profile/friends"}
-              className={isFriends ? activeTabClasses : tabClasses}
+              className={
+                isFriends
+                  ? activeTabClasses
+                  : tabClasses
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +100,10 @@ export default function ProfilePage() {
       {isFriends && (
         <div>
           <Card>
-            <h2 className=" text-3xl mb-2 "> Members </h2>
+            <h2 className=" text-3xl mb-2 ">
+              {" "}
+              Members{" "}
+            </h2>
             <div className="">
               <div className="border-b-gray-100 p-4 -mx-4">
                 <FriendInfo />

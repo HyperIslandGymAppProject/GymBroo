@@ -14,6 +14,7 @@ module.exports = {
         gymBg: "#1E1E1E",
         gymGreen: "#B1F2CF",
         gymPurple: "#6B1FD1",
+        gymRed: "#821729",
         gymGray: "#CDCDCD",
         gymCard: "#181616",
       },

@@ -4,13 +4,25 @@ import PostCard from "./PostCard";
 
 export default function Layout({
   children,
+  hideNavigation,
 }) {
+  let rightColumnClasses = "";
+  if (hideNavigation) {
+    rightColumnClasses += "w-full";
+  } else {
+    rightColumnClasses +=
+      " mx-4 md:mx-0 w - 9/12";
+  }
   return (
-    <div className="flex mt-4 max-w-4xl mx-auto gap-6">
-      <div className="w-3/12">
-        <NavigationCard />
-      </div>
-      <div className="w-9/12">
+    <div className="md:flex mt-4 max-w-4xl mx-auto gap-6">
+      {!hideNavigation && (
+        <div className="fixed md:static w-full bottom-0 md:w-3/12 -mb-5">
+          <NavigationCard />
+        </div>
+      )}
+      <div
+        className={rightColumnClasses}
+      >
         {children}
       </div>
     </div>

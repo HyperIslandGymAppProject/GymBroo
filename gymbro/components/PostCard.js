@@ -7,7 +7,9 @@ export default function PostCard() {
     <Card>
       <div className="flex gap-3 p-4 ">
         <div>
-          <Link href={"/profile/workouts"}>
+          <Link
+            href={"/profile/workouts"}
+          >
             <span className=" cursor-pointer">
               <Avatar />
             </span>
@@ -15,18 +17,26 @@ export default function PostCard() {
         </div>
         <div className="grow pt-3">
           <p>
-            <Link href={"/profile/workouts"}>
+            <Link
+              href={"/profile/workouts"}
+            >
               {" "}
               <span className="mr-1 font-semibold hover:underline cursor-pointer">
                 John Doe
               </span>{" "}
             </Link>
-            shared a <a className="text-gymPurple"> workout</a>
+            shared a{" "}
+            <a className="text-gymGreen drop-shadow-[rgba(177, 242, 207, 1)]">
+              {" "}
+              workout
+            </a>
           </p>
-          <p className="text-gymGreen text-sn">2h ago</p>
+          <p className="text-gymGreen text-sn">
+            2h ago
+          </p>
         </div>
         <div>
-          <button className="text-gray-400">
+          <button className="text-gray-400 hover:text-gymRed">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,12 +56,16 @@ export default function PostCard() {
       </div>
       <div className="pb-2">
         <p className="my-3 text-sm pl-8 pr-6">
-          Today I am gonna bench for 30000 times. Today I am gonna bench for
-          30000 times.Today I am gonna bench for 30000 times.Today I am gonna
-          bench for 30000 times. Today I am gonna bench for 30000 times
+          Today I am gonna bench for
+          30000 times. Today I am gonna
+          bench for 30000 times.Today I
+          am gonna bench for 30000
+          times.Today I am gonna bench
+          for 30000 times. Today I am
+          gonna bench for 30000 times
         </p>
         <div className="mt-5 pl-3 pb-2">
-          <button className="flex gap-2 items-container">
+          <button className="flex gap-2 items-container hover:text-gymGreen">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
