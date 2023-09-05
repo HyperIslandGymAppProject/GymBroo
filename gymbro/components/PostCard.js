@@ -1,28 +1,26 @@
+import React from "react";
 import Avatar from "./Avatar";
 import Card from "./card";
 import Link from "next/link";
+import ReactTimeAgo from "react-time-ago";
 
-export default function PostCard() {
+export default function PostCard({ content, created_at, profiles: profile }) {
   return (
     <Card>
       <div className="flex gap-3 p-4 ">
         <div>
-          <Link
-            href={"/profile/workouts"}
-          >
+          <Link href={"/profile/workouts"}>
             <span className=" cursor-pointer">
-              <Avatar />
+              <Avatar url={profile.avatar} />
             </span>
           </Link>
         </div>
         <div className="grow pt-3">
           <p>
-            <Link
-              href={"/profile/workouts"}
-            >
+            <Link href={"/profile/workouts"}>
               {" "}
               <span className="mr-1 font-semibold hover:underline cursor-pointer">
-                John Doe
+                {profile.name}
               </span>{" "}
             </Link>
             shared a{" "}
@@ -32,7 +30,7 @@ export default function PostCard() {
             </a>
           </p>
           <p className="text-gymGreen text-sn">
-            2h ago
+            <ReactTimeAgo date={created_at} />
           </p>
         </div>
         <div>
@@ -55,15 +53,7 @@ export default function PostCard() {
         </div>
       </div>
       <div className="pb-2">
-        <p className="my-3 text-sm pl-8 pr-6">
-          Today I am gonna bench for
-          30000 times. Today I am gonna
-          bench for 30000 times.Today I
-          am gonna bench for 30000
-          times.Today I am gonna bench
-          for 30000 times. Today I am
-          gonna bench for 30000 times
-        </p>
+        <p className="my-3 text-sm pl-8 pr-6">{content}</p>
         <div className="mt-5 pl-3 pb-2">
           <button className="flex gap-2 items-container hover:text-gymGreen">
             <svg

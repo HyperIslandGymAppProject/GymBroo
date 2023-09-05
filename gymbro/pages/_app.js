@@ -2,6 +2,10 @@ import "../styles/globals.css";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState } from "react";
+import TimeAgo from "javascript-time-ago";
+
+import en from "javascript-time-ago/locale/en";
+TimeAgo.addDefaultLocale(en);
 
 export default function MyApp({ Component, pageProps }) {
   // Create a new supabase browser client on every first render.
