@@ -5,14 +5,38 @@ import Card from "../components/card";
 import FriendInfo from "../components/FriendInfo";
 import Layout from "../components/Layout";
 import PostCard from "../components/PostCard";
+import { useState, useEffect } from "react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function ProfilePage() {
+  const [profile, setProfile] = useState(null);
   const router = useRouter();
+  const userId = router.query.id;
   const { asPath: pathname } = router;
-  const isWorkouts =
-    pathname.includes("workouts");
-  const isFriends =
-    pathname.includes("friends");
+  const supabase = useSupabaseClient();
+
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    supabase
+      .from("profiles")
+      .select()
+      .eq("id", userId)
+      .then((result) => {
+        if (result.error) {
+          throw result.error;
+        }
+        if (result.data) {
+          setProfile(result.data[0]);
+        }
+      });
+  }, [userId]);
+
+  console.log(profile);
+
+  const isWorkouts = pathname.includes("workouts");
+  const isFriends = pathname.includes("friends");
   const tabClasses =
     "flex gap-1 px-4 py-1 items-center border-b-4 border-b-gymCard";
   const activeTabClasses =
@@ -25,24 +49,19 @@ export default function ProfilePage() {
         <div className=" flex flex-col py-4">
           {" "}
           <div className="flex justify-center">
-            <Avatar size={"lg"} />{" "}
+            {profile && <Avatar url={profile.avatar} size={"lg"} />}
           </div>
           <div className="flex justify-center text-3xl font-bold">
             {" "}
-            <h1> John Doe </h1>
+            <h1 className="text-3XL font-bold"> {profile?.name} </h1>
           </div>
           <div className="text-gray- leading-4 flex justify-center p">
-            {" "}
-            Stockholm, Sweden
+            {profile?.place}
           </div>
           <div className="mt-10 flex gap-10">
             <Link
               href={"/profile/workouts"}
-              className={
-                isWorkouts
-                  ? activeTabClasses
-                  : tabClasses
-              }
+              className={isWorkouts ? activeTabClasses : tabClasses}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,11 +86,7 @@ export default function ProfilePage() {
             </Link>
             <Link
               href={"/profile/friends"}
-              className={
-                isFriends
-                  ? activeTabClasses
-                  : tabClasses
-              }
+              className={isFriends ? activeTabClasses : tabClasses}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -100,10 +115,7 @@ export default function ProfilePage() {
       {isFriends && (
         <div>
           <Card>
-            <h2 className=" text-3xl mb-2 ">
-              {" "}
-              Members{" "}
-            </h2>
+            <h2 className=" text-3xl mb-2 "> Members </h2>
             <div className="">
               <div className="border-b-gray-100 p-4 -mx-4">
                 <FriendInfo />

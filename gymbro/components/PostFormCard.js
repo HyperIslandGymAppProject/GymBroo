@@ -2,24 +2,15 @@ import Card from "./card";
 import Avatar from "./Avatar";
 import { useEffect, useState } from "react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 
 export default function PostFormCard({ onPost }) {
-  const [profile, setProfile] = useState(null);
   const [content, setContent] = useState();
   const supabase = useSupabaseClient();
   const session = useSession();
-
-  useEffect(() => {
-    supabase
-      .from("profiles")
-      .select()
-      .eq("id", session.user.id)
-      .then((result) => {
-        if (result.data.length) {
-          setProfile(result.data[0]); //do not understand this I
-        }
-      });
-  }, []);
+  const { profile } = useContext(UserContext); //I do not understand
+  console.log(profile);
 
   function createPost() {
     supabase

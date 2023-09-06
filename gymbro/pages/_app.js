@@ -5,7 +5,7 @@ import { useState } from "react";
 import TimeAgo from "javascript-time-ago";
 
 import en from "javascript-time-ago/locale/en";
-TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(en);
 
 export default function MyApp({ Component, pageProps }) {
   // Create a new supabase browser client on every first render.

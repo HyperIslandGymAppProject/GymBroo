@@ -4,23 +4,28 @@ import Card from "./card";
 import Link from "next/link";
 import ReactTimeAgo from "react-time-ago";
 
-export default function PostCard({ content, created_at, profiles: profile }) {
+export default function PostCard({
+  content,
+  created_at,
+  profiles: authorProfile,
+}) {
+  const timestamp = new Date(created_at).getTime();
   return (
     <Card>
       <div className="flex gap-3 p-4 ">
         <div>
-          <Link href={"/profile/workouts"}>
-            <span className=" cursor-pointer">
-              <Avatar url={profile.avatar} />
+          <Link href={"/profile/"}>
+            <span className="cursor-pointer">
+              <Avatar url={authorProfile.avatar} />
             </span>
           </Link>
         </div>
         <div className="grow pt-3">
           <p>
-            <Link href={"/profile/workouts"}>
+            <Link href={"/profile/" + authorProfile.id}>
               {" "}
               <span className="mr-1 font-semibold hover:underline cursor-pointer">
-                {profile.name}
+                {authorProfile.name}
               </span>{" "}
             </Link>
             shared a{" "}
@@ -30,7 +35,7 @@ export default function PostCard({ content, created_at, profiles: profile }) {
             </a>
           </p>
           <p className="text-gymGreen text-sn">
-            <ReactTimeAgo date={created_at} />
+            <ReactTimeAgo date={timestamp} />
           </p>
         </div>
         <div>

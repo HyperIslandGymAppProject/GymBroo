@@ -1,4 +1,73 @@
 create policy "Profiles are viewable by users who created them."
-  on profiles for select
-  using ( auth.uid() = id );
+on profiles for select
+using ( auth.uid() = id );
 
+Here's the chain of events for Profile:
+
+You have a state: const [profile, setProfile] = useState(null);. This means profile starts off as null.
+You have an effect that tries to fetch the profile from a database (or some remote source) based on session.user.id.
+Until that effect completes and updates the profile state, profile remains null.
+The UserContext.Provider uses the current value of profile (which is null initially) and provides it to all child components that use useContext(UserContext).
+The PostFormCard component tries to consume this context and therefore receives profile as null.
+
+Index.js
+useEffect(() => {
+if (!session || !session.user) {
+//chatGPT explanation
+return;
+}
+supabase
+.from("profiles")
+.select()
+.eq("id", session.user.id)
+.then((result) => {
+if (result.data.length) {
+setProfile(result.data[0]); //do not understand this I
+}
+});
+}, [session]); //chatGPT explanation. Dawid: !session?.user?.id
+
+THERE IS A SERIOUS BUG ==> Given the new context you provided, this seems like a potential problem with the sequence in which things are happening during the logout and login flow.
+
+When you log out and then log back in, there's likely a slight delay between when the session is established and when the user profile is fetched. This can happen for several reasons:
+
+1. **Asynchronous Operations**: The session might be established before the profile is fetched. Due to the asynchronous nature of JavaScript, fetching the profile might take slightly longer.
+
+2. **Cache or Session Invalidation**: When logging out, any cache or session-related data might get invalidated or cleared. When you log back in, the app has to refetch the profile from the database, introducing a delay.
+
+3. **Re-renders**: React components re-render whenever their state or props change. If the session is being set before the profile, it can cause the component to render with a valid session but an invalid (null) profile.
+
+Here are steps to diagnose and potentially fix the issue:
+
+1. **Sequential Fetching**: Ensure that the profile is only fetched once the session is completely established. You can nest asynchronous calls or use async/await to ensure that the profile fetch only happens after a valid session exists.
+
+```javascript
+useEffect(() => {
+  async function fetchProfile() {
+    if (session?.user?.id) {
+      const result = await supabase
+        .from("profiles")
+        .select()
+        .eq("id", session.user.id);
+      if (result.data.length) {
+        setProfile(result.data[0]);
+      }
+    }
+  }
+  fetchProfile();
+}, [session?.user?.id]);
+```
+
+2. **Session Change Handling**: Handle changes to the session more gracefully. When the session changes (like during logout and login), ensure that you also reset the profile state to its default value.
+
+3. **Loading State**: Implement a loading state in your application. Show a spinner or a loading message until both the session and the profile are fully loaded. This way, the user doesn't interact with a half-loaded state.
+
+4. **Error Handling**: Ensure you're handling any errors that might arise during the fetching of profiles. Maybe the error is happening but is being silently ignored.
+
+5. **Component Logic**: Check the logic of other components or hooks involved in the logout and login flow. There might be something else that's triggering a re-render or causing the fetch operation to malfunction.
+
+6. **Cache**: If you're using any form of cache, ensure that it is cleared appropriately during logout and is correctly utilized during login.
+
+Lastly, debugging tools can be handy. Consider using tools like [React DevTools](https://reactjs.org/blog/2019/08/15/new-react-devtools.html) to inspect component states and hooks in real-time. This might give you more insights into what's happening during the logout and login flow.
+
+# **Fast refresh does not work. Always loading full page**

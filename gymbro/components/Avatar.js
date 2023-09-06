@@ -7,7 +7,7 @@ export default function Avatar({ size, url }) {
     <div
       className={`${width} rounded-full flex overflow-hidden flex justify-center items-center`}
     >
-      <img src={url} alt="" />
+      <img src={url} alt="" className="w-full" />
     </div>
   );
 }
