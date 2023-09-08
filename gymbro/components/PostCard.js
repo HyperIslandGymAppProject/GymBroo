@@ -1,15 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Avatar from "./Avatar";
 import Card from "./card";
 import Link from "next/link";
 import ReactTimeAgo from "react-time-ago";
+import { UserContext } from "../contexts/UserContext";
+import { useState, useContext } from "react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function PostCard({
+  id,
   content,
   created_at,
   profiles: authorProfile,
 }) {
   const timestamp = new Date(created_at).getTime();
+  const supabase = useSupabaseClient();
+  const [joins, setJoins] = useState([]);
+  const { profile: myProfile } = useContext(UserContext);
+
+  useEffect(() => {
+    supabase
+      .from("joins")
+      .select()
+      .eq("workout_id", id)
+      .then((result) => setJoins(result.data));
+  }, []);
+
+  const isJoinedByMe = !!joins.find((join) => join.user_id === myProfile.id);
+
+  function joinTheWorkout() {
+    if (isJoinedByMe) {
+      return;
+    }
+
+    supabase
+      .from("joins")
+      .insert({
+        workout_id: id,
+        user_id: myProfile.id,
+      }) //there is a bug here. Sometimes accepts .id, sometimes say TypeError: Cannot read properties of null (reading 'id')
+      .then((result) => {
+        console.log(result);
+      });
+  }
+
   return (
     <Card>
       <div className="flex gap-3 p-4 ">
@@ -60,7 +94,10 @@ export default function PostCard({
       <div className="pb-2">
         <p className="my-3 text-sm pl-8 pr-6">{content}</p>
         <div className="mt-5 pl-3 pb-2">
-          <button className="flex gap-2 items-container hover:text-gymGreen">
+          <button
+            className="flex gap-2 items-container hover:text-gymGreen"
+            onClick={joinTheWorkout}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -75,7 +112,7 @@ export default function PostCard({
                 d="M12 4.5v15m7.5-7.5h-15"
               />
             </svg>
-            72
+            {joins?.length}
           </button>
         </div>
       </div>

@@ -46,9 +46,9 @@ export default function NavigationCard() {
           <span className="hidden md:block">Home</span>
         </Link>
         <Link
-          href="/profile/friends"
+          href="/profile/community"
           className={
-            pathname === "/profile/friends"
+            pathname === "/profile/community"
               ? activeElementClasses
               : nonActiveElementClasses
           }
