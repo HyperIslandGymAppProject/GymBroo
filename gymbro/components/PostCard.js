@@ -19,29 +19,33 @@ export default function PostCard({
   const { profile: myProfile } = useContext(UserContext);
 
   useEffect(() => {
-    supabase
-      .from("joins")
-      .select()
-      .eq("workout_id", id)
-      .then((result) => setJoins(result.data));
+    fetchJoins();
   }, []);
 
   const isJoinedByMe = !!joins.find((join) => join.user_id === myProfile.id);
 
-  function joinTheWorkout() {
+  async function toggleWorkout() {
     if (isJoinedByMe) {
-      return;
-    }
-
-    supabase
-      .from("joins")
-      .insert({
+      await supabase
+        .from("joins")
+        .delete()
+        .eq("workout_id", id)
+        .eq("user_id", myProfile.id);
+    } else {
+      await supabase.from("joins").insert({
         workout_id: id,
         user_id: myProfile.id,
-      }) //there is a bug here. Sometimes accepts .id, sometimes say TypeError: Cannot read properties of null (reading 'id')
-      .then((result) => {
-        console.log(result);
       });
+    }
+    fetchJoins();
+  }
+
+  function fetchJoins() {
+    supabase
+      .from("joins")
+      .select("*, profiles(*)")
+      .eq("workout_id", id)
+      .then((result) => setJoins(result.data));
   }
 
   return (
@@ -96,25 +100,47 @@ export default function PostCard({
         <div className="mt-5 pl-3 pb-2">
           <button
             className="flex gap-2 items-container hover:text-gymGreen"
-            onClick={joinTheWorkout}
+            onClick={toggleWorkout}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 4.5v15m7.5-7.5h-15"
-              />
-            </svg>
-            {joins?.length}
+            {isJoinedByMe ? (
+              <span>You have joined this workout</span>
+            ) : (
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 "
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+
+                {joins?.length}
+              </>
+            )}
           </button>
         </div>
+      </div>
+      <div>
+        {joins.length > 0 &&
+          joins.map((join) => (
+            <div className="flex">
+              {join && join.profiles && (
+                <>
+                  <Avatar url={join.profiles.avatar} />
+                  {myProfile && join.profiles.id !== myProfile.id && (
+                    <p>{join.profiles.name} will join this workout!</p>
+                  )}
+                </>
+              )}
+            </div>
+          ))}
       </div>
     </Card>
   );
