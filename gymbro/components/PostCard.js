@@ -133,9 +133,13 @@ export default function PostCard({
             <div className="flex">
               {join && join.profiles && (
                 <>
-                  <Avatar url={join.profiles.avatar} />
+                  <Link href={"/profile/" + join.profiles.id}>
+                    {" "}
+                    <Avatar url={join.profiles.avatar} className="" />
+                  </Link>
+
                   {myProfile && join.profiles.id !== myProfile.id && (
-                    <p>{join.profiles.name} will join this workout!</p>
+                    <p>{join.profiles.name} will join this workout!</p> //We did our own thing here
                   )}
                 </>
               )}
