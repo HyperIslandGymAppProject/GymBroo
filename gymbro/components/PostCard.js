@@ -63,7 +63,7 @@ export default function PostCard({
     <Card>
       <div className="flex gap-3 p-4 ">
         <div>
-          <Link href={"/profile/"}>
+          <Link href={"/profile/" + authorProfile.id}>
             <span className="cursor-pointer">
               <Avatar url={authorProfile.avatar} />
             </span>
