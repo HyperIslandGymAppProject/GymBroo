@@ -1,7 +1,6 @@
 import { uploadUserProfileImage } from "../contexts/helpers/user";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState } from "react";
-
 export default function Avatar({ size, url, editable, onChange }) {
   const supabase = useSupabaseClient();
   const session = useSession();
@@ -22,18 +21,19 @@ export default function Avatar({ size, url, editable, onChange }) {
     }
   }
   let width = "w-12";
-
+  let height = "h-12";
   if (size === "lg") {
     width = "w-24 md:w-36";
+    height = "h-24 md:h-36";
   }
   return (
-    <div className={`${width} relative`}>
-      <div className="rounded-full overflow-hidden">
-        <img src={url} alt="" className="w-full" />
-      </div>
+    <div
+      className={`${width} ${height} relative rounded-full overflow-hidden `}
+    >
+      <img src={url} alt="" className="w-full" />
 
       {editable && (
-        <label className="absolute bottom-0 right-4 rounded-full cursor-pointer">
+        <label className="absolute bottom-4 right-4 rounded-full cursor-pointer">
           <input type="file" className="hidden" onChange={handleAvatarChange} />
           <svg
             xmlns="http://www.w3.org/2000/svg"

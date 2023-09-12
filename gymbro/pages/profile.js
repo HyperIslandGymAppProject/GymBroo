@@ -140,7 +140,7 @@ export default function ProfilePage() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-6 h-6 m-20"
                 >
                   <path
                     strokeLinecap="round"

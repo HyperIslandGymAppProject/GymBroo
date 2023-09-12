@@ -10,7 +10,6 @@ export default function PostFormCard({ onPost }) {
   const supabase = useSupabaseClient();
   const session = useSession();
   const { profile } = useContext(UserContext); //I do not understand
-  console.log(profile);
 
   function createPost() {
     supabase
