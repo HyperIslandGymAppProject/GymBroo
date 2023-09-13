@@ -112,55 +112,51 @@ export default function PostCard({
         )}
       </div>
       <div className="pb-2">
-        <p className="my-3 text-sm pl-8 pr-6">{content}</p>
-        <div className="mt-5 pl-3 pb-2">
-          <button
-            className="flex gap-2 items-container hover:text-gymGreen"
-            onClick={toggleWorkout}
-          >
-            {isJoinedByMe ? (
-              <span>You have joined this workout</span>
-            ) : (
-              <>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 "
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-
-                {joins?.length}
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-      <div>
-        {joins.length > 0 &&
-          joins.map((join) => (
-            <div className="flex" key={join.created_at} {...join}>
-              {join && join.profiles && (
-                <>
-                  <Link href={"/profile/" + join.profiles.id}>
-                    {" "}
-                    <Avatar url={join.profiles.avatar} className="" />
-                  </Link>
-
-                  {myProfile && join.profiles.id !== myProfile.id && (
-                    <p>{join.profiles.name} will join this workout!</p> //We did our own thing here
-                  )}
-                </>
+        <p className="my-3 text-xl pl-8 pr-6">{content}</p>
+        <div className="flex mb-2 ml-3 gap-2">
+          <div className="flex mt-5 pl-3 pb-2">
+            <button
+              className="flex justify-center gap-2 items-container text-lg hover:text-gymGreen border border-gymGreen bg-transparent rounded-md mx-2 w-20"
+              onClick={toggleWorkout}
+            >
+              {isJoinedByMe ? (
+                <span className="w-20 text-lg rounded-md px-2 bg-gymGreen text-black bold">
+                  Joined
+                </span>
+              ) : (
+                <>Join</>
               )}
-            </div>
-          ))}
+            </button>
+          </div>
+        </div>
+        <div className="pb-4">
+          {joins.length > 0 &&
+            joins.map((join) => (
+              <div
+                className="flex mb-2 ml-3 gap-2"
+                key={join.created_at}
+                {...join}
+              >
+                {join && join.profiles && (
+                  <>
+                    <Link href={"/profile/" + join.profiles.id}>
+                      <Avatar url={join.profiles.avatar} size={"xs"} />
+                    </Link>
+
+                    {myProfile && join.profiles.id !== myProfile.id ? (
+                      <p className="text-sm text-gymGray italic">
+                        {join.profiles.name} will join this workout!
+                      </p>
+                    ) : (
+                      <p className="text-sm text-gymGray italic">
+                        You will join this workout!
+                      </p>
+                    )}
+                  </>
+                )}
+              </div>
+            ))}
+        </div>
       </div>
     </Card>
   );

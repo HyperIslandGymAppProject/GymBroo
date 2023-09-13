@@ -1,18 +1,18 @@
 import NavigationCard from "./NavigationCard";
-import PostFormCard from "./PostFormCard";
-import PostCard from "./PostCard";
+// import PostFormCard from "./PostFormCard";
+// import PostCard from "./PostCard";
 
 export default function Layout({ children, hideNavigation }) {
   let rightColumnClasses = "";
   if (hideNavigation) {
     rightColumnClasses += "w-full";
   } else {
-    rightColumnClasses += " mx-4 md:mx-0 w - 9/12";
+    rightColumnClasses += "mx-4 lg:mx-0 lg:w-9/12 ";
   }
   return (
-    <div className="md:flex mt-4 max-w-4xl mx-auto gap-6">
+    <div className="lg:flex mt-4 max-w-4xl mx-auto gap-6">
       {!hideNavigation && (
-        <div className="fixed md:static w-full bottom-0 md:w-3/12 -mb-5">
+        <div className="fixed lg:static w-full bottom-0 lg:w-3/12 -mb-5">
           <NavigationCard />
         </div>
       )}

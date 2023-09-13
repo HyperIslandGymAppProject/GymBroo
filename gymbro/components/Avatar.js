@@ -23,9 +23,14 @@ export default function Avatar({ size, url, editable, onChange }) {
   let width = "w-12";
   let height = "h-12";
   if (size === "lg") {
-    width = "w-24 md:w-36";
-    height = "h-24 md:h-36";
+    width = "w-36";
+    height = "h-36";
   }
+  if (size === "xs") {
+    width = "w-6";
+    height = "h-6";
+  }
+
   return (
     <div
       className={`${width} ${height} relative rounded-full overflow-hidden `}
