@@ -30,11 +30,11 @@ export default function PostCard({
         .from("joins")
         .delete()
         .eq("workout_id", id)
-        .eq("user_id", myProfile.id);
+        .eq("user_id", id);
     } else {
       await supabase.from("joins").insert({
         workout_id: id,
-        user_id: myProfile.id,
+        user_id: myProfile?.id,
       });
     }
     fetchJoins();
@@ -63,18 +63,18 @@ export default function PostCard({
     <Card>
       <div className="flex gap-3 p-4 ">
         <div>
-          <Link href={"/profile/" + authorProfile.id}>
+          <Link href={"/profile/" + authorProfile?.id}>
             <span className="cursor-pointer">
-              <Avatar url={authorProfile.avatar} />
+              <Avatar url={authorProfile?.avatar} />
             </span>
           </Link>
         </div>
         <div className="grow pt-3">
           <p>
-            <Link href={"/profile/" + authorProfile.id}>
+            <Link href={"/profile/" + authorProfile?.id}>
               {" "}
               <span className="mr-1 font-semibold hover:underline cursor-pointer">
-                {authorProfile.name}
+                {authorProfile?.name}
               </span>{" "}
             </Link>
             shared a{" "}
@@ -87,7 +87,7 @@ export default function PostCard({
             <ReactTimeAgo date={timestamp} />
           </p>
         </div>
-        {myProfile?.id === authorProfile.id && (
+        {myProfile?.id === authorProfile?.id && (
           <div className="dltBtn">
             <button
               className="text-gray-400 hover:text-gymRed"
@@ -154,7 +154,7 @@ export default function PostCard({
                     <Avatar url={join.profiles.avatar} className="" />
                   </Link>
 
-                  {myProfile && join.profiles.id !== myProfile.id && (
+                  {myProfile && join.profiles.id !== myProfile?.id && (
                     <p>{join.profiles.name} will join this workout!</p> //We did our own thing here
                   )}
                 </>
