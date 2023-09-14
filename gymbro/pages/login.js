@@ -13,15 +13,20 @@ export default function LoginPage() {
   return (
     <Layout hideNavigation={true}>
       <div className="h-screen flex items-center">
-        <div className="max-w-xs mx-auto grow -mt-24">
-          <h1 className="text-6xl mb-4 text-gray-300 text-center">Login</h1>
-          <Card noPadding={true}>
+        <div className=" place-items-auto max-w-xs mx-auto grow -mt-24">
+          <h1 className="text-7xl mb-4 text-center text-gymGreen flex align-items-center pr-8">gymtop 
+          <img class="transform rotate-90" width="48" height="48" src="https://img.icons8.com/material-rounded/48/b1f2cf/dumbbell.png" alt="dumbbell"/> 
+          <p>a</p>
+          </h1>
+          <p className="flex whitespace-nowrap mb-5 text-sm ">Plan workouts with your friends and stay connected
+          </p>
+          <div className="flex justify-center">
             <button
               onClick={loginWithGoogle}
-              className="flex w-full gap-4 items-center text-black justify-center bg-white hover:bg-gymGreen py-4 rounded-md hover:text-semibold hover:scale-110"
+              className="flex w-62 h-12 gap-4 items-center text-black justify-self-center bg-white hover:bg-gymGreen py-4 px-2 rounded-md hover:text-semibold hover:scale-110"
             >
               <svg
-                className="h-8"
+                className="pl-2 h-6"
                 xmlns="http://www.w3.org/2000/svg"
                 height="1em"
                 viewBox="0 0 488 512"
@@ -30,7 +35,7 @@ export default function LoginPage() {
               </svg>
               Login with Google
             </button>
-          </Card>
+            </div>
         </div>
       </div>
     </Layout>
