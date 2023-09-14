@@ -14,16 +14,24 @@ export default function LoginPage() {
     <Layout hideNavigation={true}>
       <div className="h-screen flex items-center">
         <div className=" place-items-auto max-w-xs mx-auto grow -mt-24">
-          <h1 className="text-7xl mb-4 text-center text-gymGreen flex align-items-center pr-8">gymtop 
-          <img class="transform rotate-90" width="48" height="48" src="https://img.icons8.com/material-rounded/48/b1f2cf/dumbbell.png" alt="dumbbell"/> 
-          <p>a</p>
-          </h1>
-          <p className="flex whitespace-nowrap mb-5 text-sm ">Plan workouts with your friends and stay connected
-          </p>
+          <div className="flex justify-center">
+            <h1 className="text-7xl mb-4 text-center text-gymGreen flex align-items-center pr-8">
+              gymtop
+              <img
+                class="transform rotate-90 mt-2"
+                width="48"
+                height="48"
+                src="https://img.icons8.com/material-rounded/48/b1f2cf/dumbbell.png"
+                alt="dumbbell"
+              />
+              <p>a</p>
+            </h1>
+          </div>
+
           <div className="flex justify-center">
             <button
               onClick={loginWithGoogle}
-              className="flex w-62 h-12 gap-4 items-center text-black justify-self-center bg-white hover:bg-gymGreen py-4 px-2 rounded-md hover:text-semibold hover:scale-110"
+              className="flex w-62 h-12 gap-4 items-center text-black mt-10 justify-self-center bg-white hover:bg-gymGreen py-4 px-2 rounded-md hover:text-semibold hover:scale-110"
             >
               <svg
                 className="pl-2 h-6"
@@ -35,7 +43,10 @@ export default function LoginPage() {
               </svg>
               Login with Google
             </button>
-            </div>
+          </div>
+          <p className="absolute bottom-0 left-0 right-0 text-center text-sm">
+            Plan workouts with your friends. stay connected.
+          </p>
         </div>
       </div>
     </Layout>
