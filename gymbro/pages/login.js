@@ -1,7 +1,6 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Layout from "../components/Layout";
-import Card from "../components/card";
-
+import LoginCanvas from "../components/loginCanvas";
 export default function LoginPage() {
   const supabase = useSupabaseClient();
   async function loginWithGoogle() {
@@ -12,6 +11,7 @@ export default function LoginPage() {
 
   return (
     <Layout hideNavigation={true}>
+      <LoginCanvas> </LoginCanvas>
       <div className="h-screen flex items-center">
         <div className=" place-items-auto max-w-xs mx-auto grow -mt-24">
           <div className="flex justify-center">
@@ -45,7 +45,8 @@ export default function LoginPage() {
             </button>
           </div>
           <p className="absolute bottom-0 left-0 right-0 text-center text-sm">
-            Plan workouts with your friends. stay connected.
+            Plan workouts with your
+            friends. stay connected.
           </p>
         </div>
       </div>
