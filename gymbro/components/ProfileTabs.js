@@ -11,7 +11,7 @@ export default function ProfileTabs({ userId, active }) {
   return (
     <div className="mt-10 flex gap-10">
       <Link
-        href={`/profile/${userId}/workouts`} //Why just this not work? Why we need slug?
+        href={`/profile/${userId}`} //Why just this not work? Why we need slug?
         className={active === "workouts" ? activeTabClasses : tabClasses}
       >
         <svg
