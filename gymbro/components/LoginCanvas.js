@@ -15,6 +15,17 @@ export default function LoginCanvas() {
     canvas.style.zIndex = -100;
 
     const particles = [];
+    const maxParticles = 20; // Adjust this value to control the number of particles
+    let particleCounter = 0;
+
+    // Load the image only once
+    const img = new Image();
+    img.src =
+      "https://img.icons8.com/ios-glyphs/30/737373/dumbbell.png";
+
+    img.onload = () => {
+      animate(); // Start the animation after the image is loaded
+    };
 
     function render() {
       canvas.width = window.innerWidth;
@@ -33,10 +44,6 @@ export default function LoginCanvas() {
         i++
       ) {
         const particle = particles[i];
-        const img = new Image();
-        img.src =
-          "https://img.icons8.com/material-rounded/48/b1f2cf/dumbbell.png";
-
         ctx.drawImage(
           img,
           particle.x -
@@ -50,7 +57,10 @@ export default function LoginCanvas() {
     }
 
     function update() {
-      while (particles.length < 100) {
+      // Limit the rate of adding particles
+      if (
+        particleCounter < maxParticles
+      ) {
         const particle = {
           x:
             Math.random() *
@@ -62,6 +72,7 @@ export default function LoginCanvas() {
         };
 
         particles.push(particle);
+        particleCounter++;
       }
 
       for (
@@ -79,6 +90,7 @@ export default function LoginCanvas() {
         ) {
           particles.splice(i, 1);
           i--;
+          particleCounter--; // Decrease the counter when a particle is removed
         }
       }
 
@@ -89,8 +101,6 @@ export default function LoginCanvas() {
       update();
       requestAnimationFrame(animate);
     }
-
-    animate();
   }, []);
 
   return null;
