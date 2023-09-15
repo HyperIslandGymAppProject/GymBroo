@@ -34,20 +34,18 @@ export default function CommunityPage() {
 
   return (
     <Layout>
-      <Card>
-        <div className="flex flex-col py-4">
-          <div className="flex justify-center">
-            {profile ? (
-              <Avatar url={profile.avatar} className="bg-white" size={"lg"} />
-            ) : (
-              <div>Loading...</div>
-            )}
-          </div>
-
-          <div className="flex justify-center text-xl">{profile?.name}</div>
-          <div className="leading-4 flex justify-center p">{profile?.name}</div>
+      <div className="flex flex-col py-4">
+        <div className="flex justify-center">
+          {profile ? (
+            <Avatar url={profile.avatar} className="bg-white" size={"lg"} />
+          ) : (
+            <div>Loading...</div>
+          )}
         </div>
-      </Card>
+
+        <div className="flex justify-center text-xl">{profile?.name}</div>
+        <div className="leading-4 flex justify-center p">{profile?.name}</div>
+      </div>
     </Layout>
   );
 }
