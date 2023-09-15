@@ -41,16 +41,27 @@ export default function ProfileContent({ activeTab, userId }) {
     return data;
   }
 
+  // async function userProfile(userId) {
+  //   const { data } = await supabase.from("profiles").select().eq("id", userId);
+  //   return data[0];
+  // }
+
   async function userProfile(userId) {
     const { data } = await supabase.from("profiles").select().eq("id", userId);
-    return data[0];
+
+    if (data && data.length > 0) {
+      return data[0];
+    } else {
+      // Handle the case where no data is found, such as returning a default value or showing an error message.
+      return null; // You can return null or another appropriate value/error handling strategy.
+    }
   }
 
   return (
     <div>
       {activeTab === "workouts" && (
         <div>
-          {workouts.length > 0 &&
+          {workouts?.length > 0 &&
             workouts.map((workout) => (
               <PostCard
                 key={workout.created_at}

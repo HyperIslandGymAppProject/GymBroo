@@ -11,14 +11,14 @@ export default function LoginPage() {
 
   return (
     <Layout hideNavigation={true}>
-      <LoginCanvas> </LoginCanvas>
+      <LoginCanvas></LoginCanvas>
       <div className="h-screen flex items-center">
         <div className=" place-items-auto max-w-xs mx-auto grow -mt-24">
           <div className="flex justify-center">
             <h1 className="text-7xl mb-4 text-center text-gymGreen flex align-items-center pr-8">
               gymtop
               <img
-                class="transform rotate-90 mt-2"
+                className="transform rotate-90 mt-2"
                 width="48"
                 height="48"
                 src="https://img.icons8.com/material-rounded/48/b1f2cf/dumbbell.png"
@@ -45,8 +45,7 @@ export default function LoginPage() {
             </button>
           </div>
           <p className="absolute bottom-0 left-0 right-0 text-center text-sm">
-            Plan workouts with your
-            friends. stay connected.
+            Plan workouts with your friends. stay connected.
           </p>
         </div>
       </div>

@@ -6,6 +6,7 @@
 
 body {
   background-color: black;
+  z-index: -2000;
   color: white;
   font-family: "Poppins", sans-serif;
 }
