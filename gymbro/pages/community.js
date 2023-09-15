@@ -10,6 +10,7 @@ export default function CommunityPage() {
   const session = useSession();
   const supabaseClient = useSupabaseClient();
   const [profile, setProfile] = useState(null);
+  const [users, setUsers] = useState(null);
   const router = useRouter();
 
   const userId = router.query?.userId || null;
@@ -21,7 +22,7 @@ export default function CommunityPage() {
         const { data, error } = await supabaseClient
           .from("profiles")
           .select("*")
-          .eq("id", userId || session.user.id);
+          .eq("id", userId || session.user.id, "avatar", "name");
 
         if (error) {
           console.error("Error fetching user profile:", error);
@@ -31,6 +32,18 @@ export default function CommunityPage() {
         }
       }
     }
+
+    function fetchUsers() {
+      const { data } = supabaseClient
+        .from("profiles")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .then((result) => {
+          console.log("profiles", result);
+          setUsers(result.data);
+        });
+    }
+    fetchUsers();
 
     fetchUserProfile();
   }, [session, supabaseClient]);
@@ -46,6 +59,15 @@ export default function CommunityPage() {
               <div>Loading...</div>
             )}
           </div>
+        </div>
+      </Card>
+      <Card>
+        <div className="py-2 py-2 px-5 text-gymGray rounded-sm flex justify-center">
+          MEMBERS
+        </div>
+        <div className="flex gap-20 justify-center">
+          {users?.length > 0 &&
+            users.map((user) => <Avatar url={user.avatar} key={user.id} />)}
         </div>
       </Card>
     </Layout>
