@@ -2,11 +2,11 @@ import Card from "./card";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useEffect, useState } from "react";
 
 export default function NavigationCard() {
   const router = useRouter();
   const { asPath: pathname } = router;
-  console.log(router);
 
   const activeElementClasses =
     "text-xs lg:text-md flex gap-2 lg:gap-4 py-3 bg-gymGreen text-black lg:-mx-2 px-5 lg:px-4 rounded-md shadow-gray";
@@ -16,9 +16,10 @@ export default function NavigationCard() {
   async function logout() {
     await supabase.auth.signOut();
   }
+
   return (
     <Card noPadding={true}>
-      <div className="lg:py-8 py-2 px-5 justify-between text-gymGray rounded-sm flex gap-4 lg:block">
+      <div className="lg: py-8 py-2 px-5 justify-between text-gymGray rounded-sm flex gap-4 lg:block">
         {" "}
         <h2 className="text-gray-400 mb-3 mx-7 -my-3 hidden lg:block">
           {" "}
@@ -47,9 +48,34 @@ export default function NavigationCard() {
           <span className="hidden lg:block">Home</span>
         </Link>
         <Link
-          href={"/community"}
+          href="Profile" //not the correct route
           className={
-            pathname === "/community"
+            pathname === "Profile"
+              ? activeElementClasses
+              : nonActiveElementClasses
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+
+          <span className="hidden lg:block">Profile</span>
+        </Link>
+        <Link
+          href="/profile/community"
+          className={
+            pathname === "/profile/community"
               ? activeElementClasses
               : nonActiveElementClasses
           }

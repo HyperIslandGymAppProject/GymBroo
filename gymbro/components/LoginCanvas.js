@@ -22,6 +22,16 @@ export default function LoginCanvas() {
     img.onload = () => {
       animate(); // Start the animation after the image is loaded
     };
+    const maxParticles = 20; // Adjust this value to control the number of particles
+    let particleCounter = 0;
+
+    // Load the image only once
+    const img = new Image();
+    img.src = "https://img.icons8.com/ios-glyphs/30/737373/dumbbell.png";
+
+    img.onload = () => {
+      animate(); // Start the animation after the image is loaded
+    };
 
     function render() {
       canvas.width = window.innerWidth;
