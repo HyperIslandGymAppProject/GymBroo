@@ -6,6 +6,7 @@ import ReactTimeAgo from "react-time-ago";
 import { UserContext } from "../contexts/UserContext";
 import { useState, useContext } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { createClient } from "@supabase/supabase-js";
 
 export default function PostCard({
   id,
@@ -114,20 +115,22 @@ export default function PostCard({
       <div className="pb-2">
         <p className="my-3 text-xl pl-8 pr-6">{content}</p>
         <div className="flex mb-2 ml-3 gap-2">
-          <div className="flex mt-5 pl-3 pb-2">
-            <button
-              className="flex justify-center gap-2 items-container text-lg hover:text-gymGreen border border-gymGreen bg-transparent rounded-md mx-2 w-20"
-              onClick={toggleWorkout}
-            >
-              {isJoinedByMe ? (
-                <span className="w-20 text-lg rounded-md px-2 bg-gymGreen text-black bold">
-                  Joined
-                </span>
-              ) : (
-                <>Join</>
-              )}
-            </button>
-          </div>
+          {myProfile?.id != authorProfile.id && (
+            <div className="flex mt-5 pl-3 pb-2">
+              <button
+                className="flex justify-center gap-2 items-container text-lg hover:text-gymGreen border border-gymGreen bg-transparent rounded-md mx-2 w-20"
+                onClick={toggleWorkout}
+              >
+                {isJoinedByMe ? (
+                  <span className="w-20 text-lg rounded-md px-2 bg-gymGreen text-black bold">
+                    Joined
+                  </span>
+                ) : (
+                  <>Join</>
+                )}
+              </button>
+            </div>
+          )}
         </div>
         <div className="pb-4">
           {joins.length > 0 &&

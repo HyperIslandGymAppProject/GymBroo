@@ -18,14 +18,23 @@ export default function PostFormCard({ onPost }) {
       .then((response) => {
         if (!response.error) {
           setContent("");
-        }
-        if (onPost) {
-          onPost();
+          // Create a notification for the user
+          supabase
+            .from("notifications")
+            .insert({
+              poster_user_id: session.user.id,
+              workout_content: "Someone has joined your workout",
+            })
+            .then(() => {
+              if (onPost) {
+                onPost();
+              }
+            })
+            .catch((error) => console.error(error));
         }
       })
       .catch((error) => console.error(error));
   }
-
   return (
     <Card>
       <div className="flex gap-2 p-4 pb ">
