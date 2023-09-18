@@ -36,8 +36,9 @@ export default function ProfileContent({ activeTab, userId }) {
   async function userWorkouts(userId) {
     const { data } = await supabase
       .from("posts")
-      .select("id, content, created_at, author")
-      .eq("author", userId);
+      .select("id, content, author, created_at")
+      .eq("author", userId)
+      .order("created_at", { ascending: false });
     return data;
   }
 

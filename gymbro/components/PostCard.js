@@ -6,7 +6,6 @@ import ReactTimeAgo from "react-time-ago";
 import { UserContext } from "../contexts/UserContext";
 import { useState, useContext } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { createClient } from "@supabase/supabase-js";
 
 export default function PostCard({
   id,
@@ -23,7 +22,7 @@ export default function PostCard({
     fetchJoins();
   }, []);
 
-  const isJoinedByMe = !!joins.find((join) => join.user_id === myProfile?.id);
+  const isJoinedByMe = !!joins?.find((join) => join.user_id === myProfile?.id);
 
   async function toggleWorkout() {
     if (isJoinedByMe) {
@@ -133,7 +132,7 @@ export default function PostCard({
           )}
         </div>
         <div className="pb-4">
-          {joins.length > 0 &&
+          {joins?.length > 0 &&
             joins.map((join) => (
               <div
                 className="flex mb-2 ml-3 gap-2"

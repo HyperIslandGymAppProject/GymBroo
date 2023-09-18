@@ -17,14 +17,7 @@ export default function PostFormCard({ onPost }) {
       .insert({ author: session.user.id, content })
       .then((response) => {
         if (!response.error) {
-          setContent("");
-          // Create a notification for the user
-          supabase
-            .from("notifications")
-            .insert({
-              poster_user_id: session.user.id,
-              workout_content: "Someone has joined your workout",
-            })
+          setContent("")
             .then(() => {
               if (onPost) {
                 onPost();
