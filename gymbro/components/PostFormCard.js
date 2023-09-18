@@ -17,13 +17,10 @@ export default function PostFormCard({ onPost }) {
       .insert({ author: session.user.id, content })
       .then((response) => {
         if (!response.error) {
-          setContent("")
-            .then(() => {
-              if (onPost) {
-                onPost();
-              }
-            })
-            .catch((error) => console.error(error));
+          setContent("");
+        }
+        if (onPost) {
+          onPost();
         }
       })
       .catch((error) => console.error(error));

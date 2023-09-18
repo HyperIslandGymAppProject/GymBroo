@@ -20,9 +20,9 @@ export default function PostCard({
 
   useEffect(() => {
     fetchJoins();
-  }, []);
+  }, []); //change 1
 
-  const isJoinedByMe = !!joins?.find((join) => join.user_id === myProfile?.id);
+  const isJoinedByMe = !!joins.find((join) => join.user_id === myProfile?.id);
 
   async function toggleWorkout() {
     if (isJoinedByMe) {
@@ -40,24 +40,44 @@ export default function PostCard({
     fetchJoins();
   }
 
-  async function handleDelete() {
-    await supabase
-      .from("posts")
-      .delete()
-      .eq("id", id)
-      .then((result) => console.log(result))
-      .catch((error) => {
-        console.error("Error deleting post:", error);
-      });
-  }
+  // async function handleDelete() {
+  //   await supabase
+  //     .from("posts")
+  //     .delete()
+  //     .eq("id", id)
+  //     .then((result) => console.log(result))
+  //     .catch((error) => {
+  //       console.error("Error deleting post:", error);
+  //     });
+  // }
 
-  function fetchJoins() {
-    supabase
+  const handleDelete = async () => {
+    try {
+      await supabase.from("posts").delete().eq("id", id);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  // async function fetchJoins() {
+  //   await supabase
+  //     .from("joins")
+  //     .select()
+  //     .eq("workout_id", id)
+  //     .then((result) => {
+  //       setJoins(result.data);
+  //       console.log("joins", joins);
+  //     });
+  //}
+  const fetchJoins = async () => {
+    console.log("Fetching joins...");
+    let { data, error } = await supabase
       .from("joins")
-      .select("*, profiles(*)")
-      .eq("workout_id", id)
-      .then((result) => setJoins(result.data));
-  }
+      .select("id, created_at, workout_id, user_id, profiles(id, name, avatar)")
+      .eq("workout_id", id);
+    if (error) console.log("error", error);
+    else setJoins(data);
+    console.log(data);
+  };
 
   return (
     <Card>
@@ -132,13 +152,9 @@ export default function PostCard({
           )}
         </div>
         <div className="pb-4">
-          {joins?.length > 0 &&
+          {joins.length > 0 &&
             joins.map((join) => (
-              <div
-                className="flex mb-2 ml-3 gap-2"
-                key={join.created_at}
-                {...join}
-              >
+              <div className="flex mb-2 ml-3 gap-2" key={join.id}>
                 {join && join.profiles && (
                   <>
                     <Link href={"/profile/" + join.profiles.id}>
