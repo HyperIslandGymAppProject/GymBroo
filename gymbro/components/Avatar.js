@@ -33,7 +33,7 @@ export default function Avatar({ size, url, editable, onChange }) {
 
   return (
     <div className={`${width} ${height} relative rounded-full overflow-hidden`}>
-      <img src={url} alt="" className="w-full" />
+      <img src={url} alt="profile picture" className="w-full" />
 
       {editable && (
         <label className="absolute bottom-4 right-4 rounded-full cursor-pointer">

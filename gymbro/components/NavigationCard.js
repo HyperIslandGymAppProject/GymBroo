@@ -33,6 +33,7 @@ export default function NavigationCard() {
         </h2>
         <Link
           href="/"
+          aria-label="Goes to home page"
           className={
             pathname === "/" ? activeElementClasses : nonActiveElementClasses
           }
@@ -55,6 +56,7 @@ export default function NavigationCard() {
         </Link>
         <Link
           href={`http://localhost:3000/profile/${userId}`}
+          aria-label="Goes to profile page"
           className={
             pathname === "/profile/[id]"
               ? activeElementClasses
@@ -81,6 +83,7 @@ export default function NavigationCard() {
         {userId && (
           <Link
             href={`http://localhost:3000/community/${userId}`}
+            aria-label="Goes to community page"
             className={
               pathname === "/community/[userId]"
                 ? activeElementClasses
@@ -106,6 +109,7 @@ export default function NavigationCard() {
         )}
         <Link
           href="/notifications"
+          aria-label="Goes to notifications page"
           className={
             pathname === "/notifications"
               ? activeElementClasses
@@ -128,7 +132,7 @@ export default function NavigationCard() {
           </svg>{" "}
           <span className="hidden lg:block">Notifications</span>
         </Link>
-        <button onClick={logout} className="w-full -my-2">
+        <button onClick={logout} className="w-full -my-2"alt="logout from page">
           <span className={nonActiveElementClasses}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
